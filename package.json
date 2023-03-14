@@ -1,0 +1,13 @@
+{
+  "name": "cpp-dsa-endgame",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "g++ -std=c++17 src/main.cpp -o dist/main.out && dist/main.out",
+    "dev": "nodemon -w src -e cpp,h --exec \"yarn start\""
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  }
+}
