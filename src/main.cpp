@@ -2,9 +2,8 @@
 
 using namespace std;
 
-#include "interviewbit/arrays/Pick from both sides!.h"
+#include "interviewbit/arrays/Min Steps in Infinite Grid.h"
 
 int main() {
     test1();
-    test2();
 }
