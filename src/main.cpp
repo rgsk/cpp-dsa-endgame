@@ -2,8 +2,11 @@
 
 using namespace std;
 
-#include "interviewbit/arrays/Min Steps in Infinite Grid.h"
-
+#include "sorting/sorting.h"
+#include "utils/utils.h"
 int main() {
-    test1();
+    vector<int> vec = {4, 3, 2, 1, 10, 9, 18, 0};
+    print(vec);
+    merge_sort(vec);
+    print(vec);
 }
