@@ -24,10 +24,8 @@ void printWithIndexes(vector<T> &vec) {
     }
     cout << endl;
 }
-void print(bool value) {
-    if (value == true) {
-        cout << "true" << endl;
-    } else {
-        cout << "false" << endl;
-    }
+
+template <typename T>
+void print(T value) {
+    cout << value << endl;
 }

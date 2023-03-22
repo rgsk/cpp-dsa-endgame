@@ -2,7 +2,10 @@
 
 using namespace std;
 
+#include "./interviewbit/Stacks And Queues/Balanced Parantheses!.h"
+
 int main() {
-    cout << 321 << endl;
+    test1();
+    test2();
     return 0;
 }
