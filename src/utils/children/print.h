@@ -9,3 +9,11 @@ void print(vector<T> &vec) {
     }
     cout << endl;
 }
+
+template <typename H>
+void print(vector<vector<H>> &vec) {
+    for (auto v : vec) {
+        print(v);
+    }
+    cout << endl;
+}

@@ -2,11 +2,9 @@
 
 using namespace std;
 
-#include "sorting/sorting.h"
-#include "utils/utils.h"
+#include "interviewbit/arrays/Set Intersection.h"
 int main() {
-    vector<int> vec = {4, 3, 2, 1, 10, 9, 18, 0};
-    print(vec);
-    bubble_sort(vec);
-    print(vec);
+    test1();
+    test2();
+    return 0;
 }
