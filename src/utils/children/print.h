@@ -17,3 +17,10 @@ void print(vector<vector<H>> &vec) {
     }
     cout << endl;
 }
+template <typename T>
+void printWithIndexes(vector<T> &vec) {
+    for (int i = 0; i < vec.size(); i++) {
+        cout << i << " : " << vec[i] << endl;
+    }
+    cout << endl;
+}
