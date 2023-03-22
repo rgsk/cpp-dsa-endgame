@@ -19,6 +19,16 @@ vector<int> subUnsort(vector<int> &A) {
         return ans;
     }
     int mn = A[i + 1], mx = A[i + 1];
+    // this is the crux and the optimization technique we use
+    // rather than checking we min max for entire array
+    // we ensure that we have got the max element from left and min element from right
+    // and then see if there is element in left that is greater than min elem in distorted array
+    // and if there is element on right that is less than max elem in distorted array
+
+    // 0 1 2 3 4 5 6  7  8 9 10 11 12 13
+    // 0 1 2 3 4 5 15 10 0 1  2  3  4  5
+    // i = 6
+    // j = 8
     for (int k = i; k <= j; k++) {
         mx = max(mx, A[k]);
         mn = min(mn, A[k]);
@@ -104,6 +114,7 @@ void test1() {
         4,
         5,
     };
+    print(A);
     auto res = subUnsortNaive2(A);
     print(res);
 }
