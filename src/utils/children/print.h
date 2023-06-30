@@ -2,14 +2,6 @@
 
 using namespace std;
 
-template <typename T>
-void print(vector<T> &vec) {
-    for (auto v : vec) {
-        cout << v << " ";
-    }
-    cout << endl;
-}
-
 template <typename H>
 void print(vector<vector<H>> &vec) {
     for (auto v : vec) {
@@ -26,6 +18,22 @@ void printWithIndexes(vector<T> &vec) {
 }
 
 template <typename T>
-void print(T value) {
-    cout << value << endl;
+void print(T arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+template <typename T>
+void print(vector<T> &vec) {
+    for (auto v : vec) {
+        cout << v << " ";
+    }
+    cout << endl;
+}
+void print(int v) {
+    cout << v << endl;
+}
+void print(string v) {
+    cout << v << endl;
 }

@@ -1,11 +1,9 @@
 #include <bits/stdc++.h>
 
+#include "utils/utils.h"
 using namespace std;
 
-#include "./interviewbit/Stacks And Queues/Balanced Parantheses!.h"
-
 int main() {
-    test1();
-    test2();
+    cout << "hii" << endl;
     return 0;
 }
