@@ -53,3 +53,18 @@ int sum(int* arr, int start, int end) {
     }
     return total;
 }
+
+int index(vector<int>& arr, int value) {
+    auto it = std::find(arr.begin(), arr.end(), value);
+    if (it != arr.end()) {
+        return distance(arr.begin(), it);
+    }
+    return -1;
+}
+int last_index(vector<int>& arr, int value) {
+    auto it = std::find(arr.rbegin(), arr.rend(), value);
+    if (it != arr.rend()) {
+        return distance(it, arr.rend()) - 1;
+    }
+    return -1;
+}
