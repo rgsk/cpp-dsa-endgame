@@ -68,3 +68,39 @@ int last_index(vector<int>& arr, int value) {
     }
     return -1;
 }
+
+vector<int> maxSuffix(vector<int>& arr) {
+    int n = arr.size();
+    vector<int> ans(n);
+    if (n == 0) {
+        return ans;
+    }
+    ans[n - 1] = arr[n - 1];
+    for (int i = n - 2; i >= 0; i--) {
+        ans[i] = max(ans[i + 1], arr[i]);
+    }
+    return ans;
+}
+vector<int> maxSuffix(int arr[], int n) {
+    vector<int> ans(n);
+    if (n == 0) {
+        return ans;
+    }
+    ans[n - 1] = arr[n - 1];
+    for (int i = n - 2; i >= 0; i--) {
+        ans[i] = max(ans[i + 1], arr[i]);
+    }
+    return ans;
+}
+
+void transpose(vector<vector<int>>& matrix) {
+    int rows = matrix.size();
+    int cols = matrix[0].size();
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (j > i) {
+                swap(matrix[i][j], matrix[j][i]);
+            }
+        }
+    }
+}
