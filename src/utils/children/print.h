@@ -2,6 +2,14 @@
 
 using namespace std;
 
+template <typename T>
+void print(vector<T> &vec) {
+    for (auto v : vec) {
+        cout << v << " ";
+    }
+    cout << endl;
+}
+
 template <typename H>
 void print(vector<vector<H>> &vec) {
     for (auto v : vec) {
@@ -24,13 +32,7 @@ void print(T arr[], int n) {
     }
     cout << endl;
 }
-template <typename T>
-void print(vector<T> &vec) {
-    for (auto v : vec) {
-        cout << v << " ";
-    }
-    cout << endl;
-}
+
 void print(int v) {
     cout << v << endl;
 }
