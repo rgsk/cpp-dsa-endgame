@@ -33,3 +33,19 @@ int main() {
         t--;
     }
 }
+
+/*
+approach
+
+if we repeat the array n times
+every larger element would start coming after smaller element
+
+eg. 3, 2, 1
+
+3, 2, 1, 3, 2, 1, 3, 2, 1
+
+in this case, 2 comes in 2nd part, 3 comes in 3rd part
+
+we can sort the array and get all the unique elements
+(as they all will form the longest increasing subsequence)
+*/
