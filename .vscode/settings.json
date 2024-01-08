@@ -82,6 +82,9 @@
     "unordered_set": "cpp",
     "valarray": "cpp",
     "variant": "cpp",
-    "algorithm": "cpp"
+    "algorithm": "cpp",
+    "__verbose_abort": "cpp",
+    "bit": "cpp",
+    "thread": "cpp"
   }
 }

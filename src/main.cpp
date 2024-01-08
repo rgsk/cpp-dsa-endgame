@@ -1,10 +1,14 @@
 #include <bits/stdc++.h>
 
-#include "utils/utils.h"
 using namespace std;
 
 int main() {
-    vector<int> vec = {1, 2, 3};
-    print(vec);
-    return 0;
+#ifndef ONLINE_JUDGE
+    // For getting input from input.txt file
+    freopen("input.txt", "r", stdin);
+
+    // Printing the Output to output.txt file
+    freopen("output.txt", "w", stdout);
+#endif
+    cout << "345" << endl;
 }
