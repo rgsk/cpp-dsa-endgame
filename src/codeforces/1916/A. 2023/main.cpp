@@ -24,9 +24,8 @@ int main() {
             n--;
         }
         if (2023 % x == 0) {
-            // first number
             cout << "YES" << endl;
-            cout << 2023 / x;
+            cout << 2023 / x;  // first number
             while (removed > 1) {
                 cout << ' ' << 1;
                 removed--;
