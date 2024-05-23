@@ -85,6 +85,8 @@
     "algorithm": "cpp",
     "__verbose_abort": "cpp",
     "bit": "cpp",
-    "thread": "cpp"
+    "thread": "cpp",
+    "charconv": "cpp",
+    "__memory": "cpp"
   }
 }

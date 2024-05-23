@@ -13,22 +13,29 @@ int main() {
 
     int t;
     cin >> t;
-    while (t > 0) {
+    while (t--) {
         int n;
         cin >> n;
-        int plus = 0;
-        int i = 0;
-        while (i < n) {
-            char c;
-            cin >> c;
-            if (c == '+') {
-                plus += 1;
-            }
-            i++;
+        int arr[n];
+        for (int i = 0; i < n; i++) {
+            cin >> arr[i];
         }
-        int minus = n - plus;
-        int result = abs(plus - minus);
-        cout << result << endl;
-        t--;
+        bool notPossible = false;
+        int ops = 0;
+        for (int i = n - 2; i >= 0; i--) {
+            while (arr[i] > 0 && arr[i] >= arr[i + 1]) {
+                arr[i] = arr[i] / 2;
+                ops += 1;
+            }
+            if (arr[i] == 0 && arr[i + 1] == 0) {
+                notPossible = true;
+                break;
+            }
+        }
+        if (notPossible) {
+            cout << -1 << endl;
+        } else {
+            cout << ops << endl;
+        }
     }
 }
