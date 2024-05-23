@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 long long solve(long long n) {
-    if (n == 0) {
-        return 0;
+    if (n <= 1) {
+        return n;
     }
     long long x = log2(n);
     long long one = 1;
