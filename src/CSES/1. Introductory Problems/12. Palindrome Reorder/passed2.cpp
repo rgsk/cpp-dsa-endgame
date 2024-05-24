@@ -16,15 +16,13 @@ int main() {
         mp[c]++;
     }
     bool possible = true;
-    bool odd = false;
-    char odd_char;
+    char odd_char = '@';
     for (auto it = mp.begin(); it != mp.end(); it++) {
         if (it->second % 2) {
-            if (odd) {
+            if (odd_char != '@') {
                 possible = false;
                 break;
             }
-            odd = true;
             odd_char = it->first;
         }
     }
@@ -32,14 +30,14 @@ int main() {
         string first = "";
         string second = "";
         for (auto it = mp.begin(); it != mp.end(); it++) {
-            if (it->first != odd_char) {
-                for (int i = 0; i < it->second / 2; i++) {
-                    first += it->first;
-                    second += it->first;
-                }
+            for (int i = 0; i < it->second / 2; i++) {
+                first += it->first;
+                second += it->first;
             }
         }
-        first += odd_char;
+        if (odd_char != '@') {
+            first += odd_char;
+        }
         reverse(second.begin(), second.end());
         string result = first + second;
         cout << result << endl;
