@@ -1,13 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void dfs(int l, int r, vector<vector<char>>& graph, int n, int m) {
-    if (l >= 0 && r >= 0 && l < n && r < m && graph[l][r] == '.') {
-        graph[l][r] = '#';
-        dfs(l + 1, r, graph, n, m);
-        dfs(l - 1, r, graph, n, m);
-        dfs(l, r + 1, graph, n, m);
-        dfs(l, r - 1, graph, n, m);
+void dfs(int i, int j, vector<vector<char>>& graph, int n, int m) {
+    if (i >= 0 && j >= 0 && i < n && j < m && graph[i][j] == '.') {
+        graph[i][j] = '#';
+        dfs(i + 1, j, graph, n, m);
+        dfs(i - 1, j, graph, n, m);
+        dfs(i, j + 1, graph, n, m);
+        dfs(i, j - 1, graph, n, m);
     }
 }
 
