@@ -13,10 +13,8 @@ class TrieNode {
 };
 
 class Trie {
-   private:
-    TrieNode* root;
-
    public:
+    TrieNode* root;
     Trie() {
         root = new TrieNode();
     }
