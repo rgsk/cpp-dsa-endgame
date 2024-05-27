@@ -2,6 +2,8 @@
 using namespace std;
 
 int main() {
-    auto v = (1 << 1);
-    cout << v << endl;
+    vector<int> vec;
+    // vec.push_back(1);
+    vec[1] = 12;
+    cout << vec[1] << endl;
 }
