@@ -1,7 +1,7 @@
-#include <cmath>
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
+
 using namespace std;
+
 typedef long long ll;
 
 class SegmentTree {
@@ -110,69 +110,30 @@ class SegmentTree {
     }
 };
 
-ll findSumInRangeBruteForce(vector<int>& arr, int i, int j) {
-    int idx = i;
-    ll total = 0;
-    while (idx <= j) {
-        total += arr[idx];
-        idx++;
-    }
-    return total;
-}
-
 int main() {
-    // Input
-    vector<int> arr = {8, 2, 5, 1, 4, 5, 3, 9, 6, 10};
-    int n = arr.size();
-
-    // Create Segment Tree
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+    int n, q;
+    cin >> n >> q;
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
     SegmentTree segmentTree(arr);
 
-    // Example query
-    int result = segmentTree.findSumOfRange(3, 8);
-    cout << result << endl;
-
-    // Validate against brute force
-    for (int i = 0; i < n; i++) {
-        for (int j = i; j < n; j++) {
-            SegmentTree bruteForce(arr);
-            if (segmentTree.findSumOfRange(i, j) != findSumInRangeBruteForce(arr, i, j)) {
-                cout << "MISMATCH" << endl;
-            }
+    while (q--) {
+        int op;
+        cin >> op;
+        if (op == 1) {
+            int a, b, u;
+            cin >> a >> b >> u;
+            segmentTree.updateRangeInArr(a - 1, b - 1, u);
+        } else {
+            int k;
+            cin >> k;
+            cout << segmentTree.findValueAtIndex(k - 1) << endl;
         }
     }
-    int updateIdx = n - 2;
-    int newValue = 9;
-    arr[updateIdx] = newValue;
-    segmentTree.updateAtIndex(updateIdx, newValue);
-
-    // Validate against brute force
-    for (int i = 0; i < n; i++) {
-        for (int j = i; j < n; j++) {
-            SegmentTree bruteForce(arr);
-            if (segmentTree.findSumOfRange(i, j) != findSumInRangeBruteForce(arr, i, j)) {
-                cout << "MISMATCH" << endl;
-            }
-        }
-    }
-
-    int startIdx = 1;
-    int endIdx = 4;
-    int add = 9;
-    for (int i = startIdx; i <= endIdx; i++) {
-        arr[i] += add;
-    }
-    segmentTree.updateRangeInArr(startIdx, endIdx, add);
-
-    // Validate against brute force
-    for (int i = 0; i < n; i++) {
-        for (int j = i; j < n; j++) {
-            SegmentTree bruteForce(arr);
-            if (segmentTree.findSumOfRange(i, j) != findSumInRangeBruteForce(arr, i, j)) {
-                cout << "MISMATCH" << endl;
-            }
-        }
-    }
-
-    return 0;
 }
