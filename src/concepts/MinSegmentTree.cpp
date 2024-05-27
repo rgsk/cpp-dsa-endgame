@@ -5,6 +5,7 @@ using namespace std;
 class SegmentTree {
    private:
     vector<int> seg;
+    int n;
 
     void build(const vector<int>& arr, int ind, int low, int high) {
         if (low == high) {
@@ -30,16 +31,34 @@ class SegmentTree {
         return min(left, right);
     }
 
+    void update(int ind, int low, int high, int i, int newVal) {
+        if (low == high && low == i) {
+            seg[ind] = newVal;
+            return;
+        }
+        if (i < low || i > high) {
+            return;
+        }
+        int mid = (low + high) / 2;
+        update(2 * ind + 1, low, mid, i, newVal);
+        update(2 * ind + 2, mid + 1, high, i, newVal);
+        seg[ind] = min(seg[2 * ind + 1], seg[2 * ind + 2]);
+    }
+
    public:
-    SegmentTree(const vector<int>& arr, int n) {
+    SegmentTree(const vector<int>& arr) {
+        n = arr.size();
         int nLevels = ceil(log2(n));
         int lengthOfSegmentTree = pow(2, nLevels + 1);
         seg.resize(lengthOfSegmentTree);
         build(arr, 0, 0, n - 1);
     }
 
-    int findMinInRange(int l, int r, int n) {
+    int findMinInRange(int l, int r) {
         return query(0, 0, n - 1, l, r);
+    }
+    void updateAtIndex(int i, int newVal) {
+        update(0, 0, n - 1, i, newVal);
     }
 };
 
@@ -59,17 +78,32 @@ int main() {
     int n = arr.size();
 
     // Create Segment Tree
-    SegmentTree segmentTree(arr, n);
+    SegmentTree segmentTree(arr);
 
     // Example query
-    int result = segmentTree.findMinInRange(3, 8, n);
+    int result = segmentTree.findMinInRange(3, 8);
     cout << result << endl;
 
     // Validate against brute force
     for (int i = 0; i < n; i++) {
         for (int j = i; j < n; j++) {
-            SegmentTree bruteForce(arr, n);
-            if (segmentTree.findMinInRange(i, j, n) != findMinInRangeBruteForce(arr, i, j)) {
+            SegmentTree bruteForce(arr);
+            if (segmentTree.findMinInRange(i, j) != findMinInRangeBruteForce(arr, i, j)) {
+                cout << "MISMATCH" << endl;
+            }
+        }
+    }
+
+    int updateIdx = n - 2;
+    int newValue = 9;
+    arr[updateIdx] = newValue;
+    segmentTree.updateAtIndex(updateIdx, newValue);
+
+    // Validate against brute force
+    for (int i = 0; i < n; i++) {
+        for (int j = i; j < n; j++) {
+            SegmentTree bruteForce(arr);
+            if (segmentTree.findMinInRange(i, j) != findMinInRangeBruteForce(arr, i, j)) {
                 cout << "MISMATCH" << endl;
             }
         }
