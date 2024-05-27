@@ -22,6 +22,15 @@ class SegmentTree {
     }
 
     void rangeUpdate(int ind, int low, int high, int l, int r, int add) {
+        if (lazy[ind] != 0) {
+            seg[ind] += (high - low + 1) * lazy[ind];
+            if (low != high) {
+                lazy[2 * ind + 1] += lazy[ind];
+                lazy[2 * ind + 2] += lazy[ind];
+            }
+            lazy[ind] = 0;
+        }
+
         // outside range
         if (high < l || low > r) {
             return;
