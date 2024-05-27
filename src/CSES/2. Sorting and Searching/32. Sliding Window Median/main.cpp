@@ -41,12 +41,12 @@ int main() {
 
     cout << *minHeap.begin() << " ";
     for (int i = k; i < n; i++) {
-        erase(arr[i - k]);
         if (arr[i] >= *minHeap.begin()) {
             minHeap.insert(arr[i]);
         } else {
             maxHeap.insert(arr[i]);
         }
+        erase(arr[i - k]);
         balance();
         cout << *minHeap.begin() << " ";
     }
