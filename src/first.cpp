@@ -2,5 +2,6 @@
 using namespace std;
 
 int main() {
-    cout << 1 << endl;
+    unordered_set<int> st;
+    st.erase(st.begin());
 }
