@@ -87,6 +87,7 @@
     "bit": "cpp",
     "thread": "cpp",
     "charconv": "cpp",
-    "__memory": "cpp"
+    "__memory": "cpp",
+    "functional": "cpp"
   }
 }
