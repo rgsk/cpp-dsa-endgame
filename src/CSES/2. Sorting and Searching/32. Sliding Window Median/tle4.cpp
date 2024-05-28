@@ -97,6 +97,11 @@ class Heap {
     void erase(const T& val) {
         if (heap.empty())
             throw runtime_error("Heap is empty");
+        // we tried to optimize erase function
+        // by tracking indexes of values inside heap
+        // this way we don't have to look for index of val in heap
+        // at the time of erase
+        // but tracking indexes takes a lot of extra time
         int index = popIndex(val);
         if (index == heap.size() - 1) {
             heap.pop_back();

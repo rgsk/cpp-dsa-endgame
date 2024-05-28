@@ -71,6 +71,10 @@ class Heap {
     void erase(const T& val) {
         if (heap.empty())
             throw runtime_error("Heap is empty");
+        // because we have to find the element in the heap
+        // this operation becomes O(n)
+        // while when erase using heap-multiset
+        // the operation takes O(logn)
         int index = find(heap.begin(), heap.end(), val) - heap.begin();
         if (index == heap.size()) {
             throw runtime_error("element not present in heap");
