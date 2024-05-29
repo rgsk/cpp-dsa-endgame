@@ -2,7 +2,7 @@
 using namespace std;
 typedef long long ll;
 typedef pair<ll, ll> pii;
-
+// Dijkstra's
 int main() {
 #ifndef ONLINE_JUDGE
     // For getting input from input.txt file
