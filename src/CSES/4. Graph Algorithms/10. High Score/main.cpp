@@ -7,23 +7,49 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
     int n, m;
-    vector<vector<pair<int, int>>> graph(n + 1);
+    cin >> n >> m;
+    vector<vector<int>> edges(m);
     for (int i = 0; i < m; i++) {
         int a, b, x;
         cin >> a >> b >> x;
-        graph[a].push_back({x, b});
+        edges[i] = {a, b, x};
     }
-    priority_queue<pair<int, int>> q;
-    q.push({0, 1});
-    while (!q.empty()) {
-        auto [acc_cost, node] = q.top();
-        q.pop();
-        for (auto [cost, child] : graph[node]) {
-            if (child == n) {
-                cout << acc_cost + cost << endl;
-                return 0;
+    vector<long long> distances(n + 1, LONG_MIN);
+    distances[1] = 0;
+    for (int i = 0; i < n - 1; i++) {
+        for (auto edge : edges) {
+            int a = edge[0];
+            int b = edge[1];
+            int wt = edge[2];
+            if (distances[a] != LONG_MIN && distances[a] + wt > distances[b]) {
+                distances[b] = distances[a] + wt;
             }
-            q.push({acc_cost + cost, child});
         }
+    }
+    vector<bool> part_of_cycle(n + 1);
+    for (auto edge : edges) {
+        int a = edge[0];
+        int b = edge[1];
+        int wt = edge[2];
+        if (distances[a] != LONG_MIN && distances[a] + wt > distances[b]) {
+            // if we can still update the distance
+            // we have a positive cycle
+            part_of_cycle[b] = true;
+        }
+    }
+    for (int i = 0; i < n - 1; i++) {
+        for (auto edge : edges) {
+            int a = edge[0];
+            int b = edge[1];
+            if (part_of_cycle[a]) {
+                part_of_cycle[b] = true;
+            }
+        }
+    }
+
+    if (part_of_cycle[n]) {
+        cout << -1 << endl;
+    } else {
+        cout << distances[n] << endl;
     }
 }
