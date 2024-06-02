@@ -14,7 +14,9 @@ int count_ways(int i, int v, int n, int m, const vector<int>& x, vector<vector<i
     int result = 0;
     if (x[i] != 0) {
         if (abs(x[i] - v) <= 1) {
-            result = count_ways(i + 1, x[i], n, m, x, memo) % MOD;
+            // use count_ways only if the last value is set correctly
+            // ie. difference between current value and last value set is 1
+            result = count_ways(i + 1, x[i], n, m, x, memo);
         }
     } else {
         for (int new_v = max(1, v - 1); new_v <= min(v + 1, m); ++new_v) {
@@ -31,7 +33,7 @@ int solve(int n, int m, const vector<int>& x) {
 
     if (x[0] == 0) {
         int result = 0;
-        // If the first element is unknown, try all possible values
+        // If the first element is unknown, it can be set any value from 1 to m
         for (int v = 1; v <= m; ++v) {
             result = (result + count_ways(1, v, n, m, x, memo)) % MOD;
         }
