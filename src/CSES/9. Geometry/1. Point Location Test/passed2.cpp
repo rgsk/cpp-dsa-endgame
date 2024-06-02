@@ -17,10 +17,6 @@ struct P {
     ll operator*(const P& b) const {
         return 1LL * x * b.y - 1LL * y * b.x;
     }
-    ll triangle(const P& b, const P& c) const {
-        // returns value < 0 if b is on left of c
-        return (b - *this) * (c - *this);
-    }
 };
 
 void test_case() {
@@ -28,7 +24,9 @@ void test_case() {
     p1.read();
     p2.read();
     p3.read();
-    ll cross_product = p1.triangle(p2, p3);
+    p2 -= p1;
+    p3 -= p1;
+    ll cross_product = p2 * p3;
     if (cross_product < 0) {
         cout << "RIGHT" << endl;
     } else if (cross_product > 0) {
