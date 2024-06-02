@@ -88,6 +88,17 @@
     "thread": "cpp",
     "charconv": "cpp",
     "__memory": "cpp",
-    "functional": "cpp"
+    "functional": "cpp",
+    "codecvt": "cpp",
+    "numbers": "cpp",
+    "semaphore": "cpp",
+    "span": "cpp",
+    "*.tcc": "cpp",
+    "iterator": "cpp",
+    "memory_resource": "cpp",
+    "utility": "cpp",
+    "format": "cpp",
+    "stop_token": "cpp",
+    "text_encoding": "cpp"
   }
 }

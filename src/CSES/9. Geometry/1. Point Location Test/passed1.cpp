@@ -1,32 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-
-struct P {
-    int x, y;
-    void read() {
-        cin >> x >> y;
-    }
-    P operator-(const P& b) const {
-        return P{x - b.x, y - b.y};
-    }
-    void operator-=(const P& b) {
-        x -= b.x;
-        y -= b.y;
-    }
-    ll operator*(const P& b) const {
-        return 1LL * x * b.y - 1LL * y * b.x;
-    }
-};
-
 void test_case() {
-    P p1, p2, p3;
-    p1.read();
-    p2.read();
-    p3.read();
-    p2 -= p1;
-    p3 -= p1;
-    ll cross_product = p2 * p3;
+    int x1, y1, x2, y2, x3, y3;
+    cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+    x2 -= x1;
+    y2 -= y1;
+    x3 -= x1;
+    y3 -= y1;
+    ll cross_product = 1LL * x2 * y3 - 1LL * x3 * y2;
     if (cross_product < 0) {
         cout << "RIGHT" << endl;
     } else if (cross_product > 0) {
@@ -35,6 +17,7 @@ void test_case() {
         cout << "TOUCH" << endl;
     }
 }
+
 int main() {
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
