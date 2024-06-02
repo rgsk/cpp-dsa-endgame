@@ -17,8 +17,10 @@ int count_ways(int i, int v, int n, int m, const vector<int>& x, vector<vector<i
             result = count_ways(i + 1, x[i], n, m, x, memo) % MOD;
         }
     } else {
-        for (int new_v = max(1, v - 1); new_v <= min(v + 1, m); ++new_v) {
-            result = (result + count_ways(i + 1, new_v, n, m, x, memo)) % MOD;
+        for (int new_v = 1; new_v <= m; ++new_v) {
+            if (abs(new_v - v) <= 1) {
+                result = (result + count_ways(i + 1, new_v, n, m, x, memo)) % MOD;
+            }
         }
     }
 
@@ -31,13 +33,11 @@ int solve(int n, int m, const vector<int>& x) {
 
     if (x[0] == 0) {
         int result = 0;
-        // If the first element is unknown, try all possible values
         for (int v = 1; v <= m; ++v) {
             result = (result + count_ways(1, v, n, m, x, memo)) % MOD;
         }
         return result;
     } else {
-        // If the first element is known, start with that value
         return count_ways(1, x[0], n, m, x, memo);
     }
 }
