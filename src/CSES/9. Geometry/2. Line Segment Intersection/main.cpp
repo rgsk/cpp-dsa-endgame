@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-
+// https://www.youtube.com/watch?v=G9QTjWtK_TQ
 struct P {
     int x, y;
     void read() {
