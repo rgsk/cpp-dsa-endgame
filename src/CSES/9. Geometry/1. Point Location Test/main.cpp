@@ -19,6 +19,7 @@ struct P {
     }
     ll triangle(const P& b, const P& c) const {
         // returns value < 0 if b is on left of c
+        // when looking from this to b
         return (b - *this) * (c - *this);
     }
 };
