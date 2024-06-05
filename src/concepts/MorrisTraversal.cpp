@@ -2,6 +2,9 @@
 
 using namespace std;
 
+// Striver Video Link
+// https://www.youtube.com/watch?v=80Zug6D1_r4
+
 struct TreeNode {
     int val;
     TreeNode *left;
