@@ -1,1 +1,10 @@
-7
+nextIndex 2
+nextIndex 2
+nextIndex 1
+nextIndex 1
+nextIndex 0
+nextIndex 2
+nextIndex 0
+nextIndex 1
+nextIndex 0
+1
