@@ -41,14 +41,7 @@ int main() {
         for (int j = 0; j < i; j++) {
             if (ranges[i].end <= ranges[j].end) {
                 contains[ranges[j].index]++;
-            }
-        }
-    }
-
-    for (int i = n - 1; i >= 0; i--) {
-        for (int j = n - 1; j > i; j--) {
-            if (ranges[i].end >= ranges[j].end) {
-                isContainedBy[ranges[j].index]++;
+                isContainedBy[ranges[i].index]++;
             }
         }
     }
