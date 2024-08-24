@@ -10,7 +10,7 @@ int main() {
     cin >> n >> x;
     ll ans = 0;
     ll total = 0;
-    unordered_map<ll, int> mp;
+    map<ll, int> mp;
     mp[0] = 1;
     for (int i = 0; i < n; i++) {
         int v;
