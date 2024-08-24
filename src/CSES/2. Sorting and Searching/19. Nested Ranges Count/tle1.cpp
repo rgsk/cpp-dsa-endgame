@@ -36,9 +36,6 @@ int main() {
     // Count "contains" using descending end points for the same start point
     sort(ranges.begin(), ranges.end(), containsCompare);
 
-    vector<int> endTracker(n, 0);
-    vector<int> freq(n, 0);
-
     for (int i = 0; i < n; i++) {
         // Binary search to find how many ranges this range contains
         for (int j = 0; j < i; j++) {
