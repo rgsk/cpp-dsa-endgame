@@ -99,6 +99,19 @@
     "utility": "cpp",
     "format": "cpp",
     "stop_token": "cpp",
-    "text_encoding": "cpp"
+    "text_encoding": "cpp",
+    "any": "cpp",
+    "barrier": "cpp",
+    "cuchar": "cpp",
+    "latch": "cpp",
+    "shared_mutex": "cpp",
+    "source_location": "cpp",
+    "coroutine": "cpp",
+    "expected": "cpp",
+    "ranges": "cpp",
+    "spanstream": "cpp",
+    "stacktrace": "cpp",
+    "stdfloat": "cpp",
+    "syncstream": "cpp"
   }
 }
