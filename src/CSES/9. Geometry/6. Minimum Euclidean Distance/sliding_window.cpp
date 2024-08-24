@@ -12,7 +12,7 @@ struct P {
         return 1LL * (x - b.x) * (x - b.x) + 1LL * (y - b.y) * (y - b.y);
     }
 };
-
+// here we use sliding window technique
 int main() {
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
