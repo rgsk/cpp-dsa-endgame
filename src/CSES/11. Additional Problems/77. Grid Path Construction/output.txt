@@ -1,0 +1,7 @@
+YES
+RR
+NO
+NO
+YES
+RDL
+NO
