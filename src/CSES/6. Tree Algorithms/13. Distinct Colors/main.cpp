@@ -16,6 +16,10 @@ void dfs(int node, int parent) {
     for (int child : adj[node]) {
         if (child != parent) {
             dfs(child, node);
+            // POINT: this optimization is crucial and the main idea of the problem
+            if (colorSet[child]->size() > colorSet[node]->size()) {
+                swap(colorSet[child], colorSet[node]);
+            }
             colorSet[node]->insert(colorSet[child]->begin(), colorSet[child]->end());
         }
     }
@@ -47,7 +51,7 @@ int main() {
 
     // Output the result for each node
     for (int i = 1; i <= n; i++) {
-        cout << result[i] << endl;
+        cout << result[i] << " ";
     }
 
     return 0;
