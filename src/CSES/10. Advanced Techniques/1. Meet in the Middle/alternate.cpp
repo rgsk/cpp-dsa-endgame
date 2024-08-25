@@ -38,9 +38,26 @@ int main() {
     sort(second_subset_sums.begin(), second_subset_sums.end());
 
     ll count = 0;
-    for (ll sum : first_subset_sums) {
-        auto it = equal_range(second_subset_sums.begin(), second_subset_sums.end(), x - sum);
-        count += it.second - it.first;
+    int i = 0, j = second_subset_sums.size() - 1;
+    while (i < first_subset_sums.size() && j >= 0) {
+        if (first_subset_sums[i] + second_subset_sums[j] == x) {
+            ll first_count = 1, second_count = 1;
+            while (i + 1 < first_subset_sums.size() && first_subset_sums[i] == first_subset_sums[i + 1]) {
+                i++;
+                first_count++;
+            }
+            while (j - 1 >= 0 && second_subset_sums[j] == second_subset_sums[j - 1]) {
+                j--;
+                second_count++;
+            }
+            count += first_count * second_count;
+            i++;
+            j--;
+        } else if (first_subset_sums[i] + second_subset_sums[j] < x) {
+            i++;
+        } else {
+            j--;
+        }
     }
     cout << count << endl;
 }
