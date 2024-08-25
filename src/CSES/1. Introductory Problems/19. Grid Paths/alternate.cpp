@@ -19,35 +19,29 @@ int dfs(int x, int y, int step) {
         return step == M;
     }
 
-    // Deadlock avoidance checks
-    if ((isValid(x + 1, y) && isValid(x - 1, y)) &&
-        (!isValid(x, y - 1) && !isValid(x, y + 1))) {
-        // POINT:
-        // If we can only go up and down, but not left or right
-        // it means either upper side or lower side won't be covered
-        return 0;
-    }
-    if ((isValid(x, y + 1) && isValid(x, y - 1)) &&
-        (!isValid(x + 1, y) && !isValid(x - 1, y))) {
-        // If we can only go left and right, but not up or down
-        return 0;
-    }
-
     visited[x][y] = true;
     int totalPaths = 0;
 
     char c = path[step];
     if ((c == 'D' || c == '?') && isValid(x + 1, y)) {
-        totalPaths += dfs(x + 1, y, step + 1);
+        if (!(isValid(x + 1, y + 1) && isValid(x + 1, y - 1) && !isValid(x + 2, y))) {
+            totalPaths += dfs(x + 1, y, step + 1);
+        }
     }
     if ((c == 'U' || c == '?') && isValid(x - 1, y)) {
-        totalPaths += dfs(x - 1, y, step + 1);
+        if (!(isValid(x - 1, y + 1) && isValid(x - 1, y - 1) && !isValid(x - 2, y))) {
+            totalPaths += dfs(x - 1, y, step + 1);
+        }
     }
     if ((c == 'L' || c == '?') && isValid(x, y - 1)) {
-        totalPaths += dfs(x, y - 1, step + 1);
+        if (!(isValid(x + 1, y - 1) && isValid(x - 1, y - 1) && !isValid(x, y - 2))) {
+            totalPaths += dfs(x, y - 1, step + 1);
+        }
     }
     if ((c == 'R' || c == '?') && isValid(x, y + 1)) {
-        totalPaths += dfs(x, y + 1, step + 1);
+        if (!(isValid(x + 1, y + 1) && isValid(x - 1, y + 1) && !isValid(x, y + 2))) {
+            totalPaths += dfs(x, y + 1, step + 1);
+        }
     }
 
     visited[x][y] = false;
