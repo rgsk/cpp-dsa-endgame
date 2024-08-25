@@ -9,16 +9,19 @@ void generate_next_masks(int current_mask, int i, int next_mask, int n, vector<i
     }
 
     // If the current position is already covered, move to the next
-    if ((current_mask & (1 << i)) != 0)
+    if ((current_mask & (1 << i)) != 0) {
         generate_next_masks(current_mask, i + 1, next_mask, n, next_masks);
-
-    // Try placing a horizontal tile if possible
-    if (i != n && (current_mask & (1 << i)) == 0 && (current_mask & (1 << (i + 1))) == 0)
-        generate_next_masks(current_mask, i + 2, next_mask, n, next_masks);
+    }
 
     // Try placing a vertical tile if possible
-    if ((current_mask & (1 << i)) == 0)
+    if (i != n && (current_mask & (1 << i)) == 0 && (current_mask & (1 << (i + 1))) == 0) {
+        generate_next_masks(current_mask, i + 2, next_mask, n, next_masks);
+    }
+
+    // Try placing a horizontal tile if possible
+    if ((current_mask & (1 << i)) == 0) {
         generate_next_masks(current_mask, i + 1, next_mask + (1 << i), n, next_masks);
+    }
 }
 
 int dp[1001][1 << 11];  // n is max 10, so 2^11 = 2048 possible masks
