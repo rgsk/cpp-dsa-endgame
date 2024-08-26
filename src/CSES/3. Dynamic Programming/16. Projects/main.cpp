@@ -1,5 +1,44 @@
 #include <bits/stdc++.h>
 using namespace std;
+typedef long long ll;
+const int maxN = 2e5 + 5;
+
+struct Project {
+    int start, end, reward;
+};
+
+vector<Project> projects;
+vector<ll> memo(maxN, -1);
+
+// Binary search to find the last project that does not overlap with the current project
+int findLastNonOverlapping(int index) {
+    int low = 0, high = index - 1, ans = -1;
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (projects[mid].end < projects[index].start) {
+            ans = mid;
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    return ans;
+}
+
+// Recursive function with memoization
+ll maxReward(int index) {
+    if (index < 0) return 0;                    // Base case
+    if (memo[index] != -1) return memo[index];  // Return already computed result
+
+    // Option 1: Don't take the current project
+    ll result = maxReward(index - 1);
+
+    // Option 2: Take the current project
+    int lastNonOverlap = findLastNonOverlapping(index);
+    result = max(result, projects[index].reward + maxReward(lastNonOverlap));
+
+    return memo[index] = result;
+}
 
 int main() {
 #ifndef ONLINE_JUDGE
@@ -8,31 +47,20 @@ int main() {
 #endif
     int n;
     cin >> n;
-    int max_e = 0;
-    vector<tuple<int, int, int>> projects(n);
-    for (int i = 0; i < n; i++) {
-        int s, e, p;
-        cin >> s >> e >> p;
-        max_e = max(max_e, e);
-        projects[i] = {s, e, p};
+    projects.resize(n);
+
+    for (int i = 0; i < n; ++i) {
+        cin >> projects[i].start >> projects[i].end >> projects[i].reward;
     }
-    sort(projects.begin(), projects.end());
-    // write dynamic programming solution
-    vector<vector<int>> dp(n + 1, vector<int>(max_e + 1, -1));
-    for (int i = n; i <= 0; i--) {
-        for (int last = max_e; last <= 0; last--) {
-            if (i == n) {
-                dp[i][last] = 0;
-                continue;
-            }
-            int s, e, p;
-            tie(s, e, p) = projects[i];
-            if (s > last) {
-                dp[i][last] = max(p + dp[i + 1][e], dp[i + 1][last]);
-            } else {
-                dp[i][last] = dp[i + 1][last];
-            }
-        }
-    }
-    cout << dp[0][0] << endl;
+
+    // Sort projects by their ending day
+    sort(projects.begin(), projects.end(), [](const Project &a, const Project &b) {
+        return a.end < b.end;
+    });
+
+    // Compute the maximum reward
+    ll result = maxReward(n - 1);
+    cout << result << endl;
+
+    return 0;
 }
