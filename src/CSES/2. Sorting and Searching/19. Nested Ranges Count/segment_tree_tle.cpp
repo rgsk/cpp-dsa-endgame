@@ -1,9 +1,6 @@
-#include <cmath>
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-
 class SegmentTree {
    private:
     vector<ll> seg;
@@ -106,69 +103,62 @@ class SegmentTree {
     }
 };
 
-ll findSumInRangeBruteForce(vector<int>& arr, int i, int j) {
-    int idx = i;
-    ll total = 0;
-    while (idx <= j) {
-        total += arr[idx];
-        idx++;
-    }
-    return total;
+struct Range {
+    int start, end, index;
+};
+bool compare(const Range& a, const Range& b) {
+    if (a.start == b.start)
+        return a.end > b.end;  // Sort by end descending if start is the same
+    return a.start < b.start;
 }
-
 int main() {
-    // Input
-    vector<int> arr = {8, 2, 5, 1, 4, 5, 3, 9, 6, 10};
-    int n = arr.size();
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+    int n;
+    cin >> n;
 
-    // Create Segment Tree
+    vector<Range> ranges(n);
+    vector<int> contains(n, 0);
+    vector<int> isContainedBy(n, 0);
+    int maxEnd = 0;
+    for (int i = 0; i < n; i++) {
+        cin >> ranges[i].start >> ranges[i].end;
+        maxEnd = max(maxEnd, ranges[i].end);
+        ranges[i].index = i;
+    }
+
+    // Sort ranges by starting point, and by descending end point for the same start point
+    sort(ranges.begin(), ranges.end(), compare);
+
+    // use segment tree
+    vector<int> arr(maxEnd + 1, 0);
     SegmentTree segmentTree(arr);
 
-    // Example query
-    int result = segmentTree.findSumOfRange(3, 8);
-    cout << result << endl;
-
-    // Validate against brute force
+    // calculate isContainedBy
     for (int i = 0; i < n; i++) {
-        for (int j = i; j < n; j++) {
-            SegmentTree bruteForce(arr);
-            if (segmentTree.findSumOfRange(i, j) != findSumInRangeBruteForce(arr, i, j)) {
-                cout << "MISMATCH" << endl;
-            }
-        }
+        isContainedBy[ranges[i].index] = segmentTree.findSumOfRange(ranges[i].end, maxEnd);
+        segmentTree.updateIndexBy(ranges[i].end, 1);
     }
-    int updateIdx = n - 2;
-    int newValue = 9;
-    arr[updateIdx] = newValue;
-    segmentTree.updateAtIndex(updateIdx, newValue);
 
-    // Validate against brute force
+    // reset segment tree
+    segmentTree.reset();
+
+    // calculate contains
+    for (int i = n - 1; i >= 0; i--) {
+        contains[ranges[i].index] = segmentTree.findSumOfRange(ranges[i].start, ranges[i].end);
+        segmentTree.updateIndexBy(ranges[i].end, 1);
+    }
+
+    // Output the results
     for (int i = 0; i < n; i++) {
-        for (int j = i; j < n; j++) {
-            SegmentTree bruteForce(arr);
-            if (segmentTree.findSumOfRange(i, j) != findSumInRangeBruteForce(arr, i, j)) {
-                cout << "MISMATCH" << endl;
-            }
-        }
+        cout << contains[i] << " ";
     }
-
-    int startIdx = 1;
-    int endIdx = 4;
-    int add = 9;
-    for (int i = startIdx; i <= endIdx; i++) {
-        arr[i] += add;
-    }
-    segmentTree.updateRangeInArr(startIdx, endIdx, add);
-
-    // Validate against brute force
+    cout << endl;
     for (int i = 0; i < n; i++) {
-        for (int j = i; j < n; j++) {
-            SegmentTree bruteForce(arr);
-            if (segmentTree.findSumOfRange(i, j) != findSumInRangeBruteForce(arr, i, j)) {
-                cout << "MISMATCH" << endl;
-            }
-        }
+        cout << isContainedBy[i] << " ";
     }
-
+    cout << endl;
     return 0;
 }
