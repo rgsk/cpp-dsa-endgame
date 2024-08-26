@@ -121,22 +121,20 @@ int main() {
     vector<Range> ranges(n);
     vector<int> contains(n, 0);
     vector<int> isContainedBy(n, 0);
-    vector<int> coords;
+    set<int> coordSet;
 
     for (int i = 0; i < n; i++) {
         cin >> ranges[i].start >> ranges[i].end;
         ranges[i].index = i;
-        coords.push_back(ranges[i].start);
-        coords.push_back(ranges[i].end);
+        coordSet.insert(ranges[i].start);
+        coordSet.insert(ranges[i].end);
     }
 
     // Coordinate compression
-    sort(coords.begin(), coords.end());
-    coords.erase(unique(coords.begin(), coords.end()), coords.end());
-
     unordered_map<int, int> coordMap;
-    for (int i = 0; i < coords.size(); i++) {
-        coordMap[coords[i]] = i;
+    int maxEnd = 0;
+    for (int coord : coordSet) {
+        coordMap[coord] = maxEnd++;
     }
 
     // Adjust ranges with compressed coordinates
@@ -149,11 +147,11 @@ int main() {
     sort(ranges.begin(), ranges.end(), compare);
 
     // use segment tree
-    SegmentTree segmentTree(coords.size());
+    SegmentTree segmentTree(maxEnd);
 
     // calculate isContainedBy
     for (int i = 0; i < n; i++) {
-        isContainedBy[ranges[i].index] = segmentTree.findSumOfRange(ranges[i].end, coords.size() - 1);
+        isContainedBy[ranges[i].index] = segmentTree.findSumOfRange(ranges[i].end, maxEnd - 1);
         segmentTree.updateIndexBy(ranges[i].end, 1);
     }
 
