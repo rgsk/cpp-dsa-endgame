@@ -45,13 +45,15 @@ int main() {
     ordered_set<pair<int, int>> ends;
 
     for (int i = 0; i < n; i++) {
-        isContainedBy[ranges[i].index] = i - ends.order_of_key({ranges[i].end, -1});
+        // all elemeents greater than or equal to end
+        isContainedBy[ranges[i].index] = ends.size() - ends.order_of_key({ranges[i].end, -1});
         ends.insert({ranges[i].end, ranges[i].index});
     }
 
     ends.clear();
 
     for (int i = n - 1; i >= 0; i--) {
+        // all elemeents less than or equal to end
         contains[ranges[i].index] = ends.order_of_key({ranges[i].end + 1, -1});
         ends.insert({ranges[i].end, ranges[i].index});
     }
