@@ -14,13 +14,15 @@ void updateRoundsAfterSwap(int indexA, int indexB) {
     if (positions[arrayValues[indexA] + 1] < positions[arrayValues[indexA]] && indexB <= positions[arrayValues[indexA] + 1]) rounds--;
 
     // Update the position of the element after swapping
+    // this is necessary to prevent double counting
+    // when a-1, a or a, a+1 are swapped
     positions[arrayValues[indexA]] = indexB;
 
     // Adjust rounds for the element at indexB
-    if (positions[arrayValues[indexB] - 1] < positions[arrayValues[indexB]] && indexA <= positions[arrayValues[indexB] - 1]) rounds++;
-    if (positions[arrayValues[indexB] - 1] > positions[arrayValues[indexB]] && indexA >= positions[arrayValues[indexB] - 1]) rounds--;
-    if (positions[arrayValues[indexB] + 1] > positions[arrayValues[indexB]] && indexA >= positions[arrayValues[indexB] + 1]) rounds++;
-    if (positions[arrayValues[indexB] + 1] < positions[arrayValues[indexB]] && indexA <= positions[arrayValues[indexB] + 1]) rounds--;
+    if (positions[arrayValues[indexB] - 1] < positions[arrayValues[indexB]] && indexA < positions[arrayValues[indexB] - 1]) rounds++;
+    if (positions[arrayValues[indexB] - 1] > positions[arrayValues[indexB]] && indexA > positions[arrayValues[indexB] - 1]) rounds--;
+    if (positions[arrayValues[indexB] + 1] > positions[arrayValues[indexB]] && indexA > positions[arrayValues[indexB] + 1]) rounds++;
+    if (positions[arrayValues[indexB] + 1] < positions[arrayValues[indexB]] && indexA < positions[arrayValues[indexB] + 1]) rounds--;
 
     // Update the position of the element after swapping
     positions[arrayValues[indexB]] = indexA;
