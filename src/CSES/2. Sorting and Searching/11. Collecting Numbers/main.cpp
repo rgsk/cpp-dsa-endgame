@@ -16,6 +16,10 @@ int main() {
     }
     int rounds = 1;
     for (int i = 2; i <= n; i++) {
+        // effectively we are asking the question
+        // whether the current element can go along with previous element
+        // in the current round
+        // if not, we need to start a new round
         if (pos[i - 1] > pos[i]) {
             rounds++;
         }
