@@ -32,7 +32,7 @@ int main() {
     for (long long i = 1; i <= x;) {
         long long quotient = x / i;
         long long next_i = x / quotient + 1;
-        long long add = (quotient % MOD) * sumFromAtoB(i, next_i - 1) % MOD;
+        long long add = quotient * sumFromAtoB(i, next_i - 1) % MOD;
         total = (total + add) % MOD;
         i = next_i;
     }
