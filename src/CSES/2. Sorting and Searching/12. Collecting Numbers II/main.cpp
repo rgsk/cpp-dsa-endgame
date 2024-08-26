@@ -15,7 +15,7 @@ void updateRoundsAfterSwap(int indexA, int indexB) {
 
     // Update the position of the element after swapping
     // this is necessary to prevent double counting
-    // when a-1, a or a, a+1 are swapped
+    // when v-1, v or v, v+1 are swapped
     positions[arrayValues[indexA]] = indexB;
 
     // Adjust rounds for the element at indexB
