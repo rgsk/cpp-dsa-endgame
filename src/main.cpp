@@ -1,16 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
+void perm(int idx, int n, string s) {
+    if (idx == n) {
+        cout << s << endl;
+        return;
+    }
+    for (int i = idx; i < n; i++) {
+        if (i != idx && s[i] == s[idx]) {
+            continue;
+        }
+        swap(s[i], s[idx]);
+        perm(idx + 1, n, s);
+        swap(s[i], s[idx]);
+    }
+}
 
 int main() {
-#ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-#endif
-    int n = 5;
-    vector<int> children(n);
-    iota(children.begin(), children.end(), 1);  // Fill the vector with 1 to n
-    // print children
-    for (int i = 0; i < n; i++) {
-        cout << children[i] << " ";
-    }
+    string s = "1134";
+    perm(0, s.size(), s);
 }
