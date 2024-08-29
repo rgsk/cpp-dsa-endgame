@@ -41,6 +41,8 @@ int main() {
     perm(0, s.size(), s);
     cout << "Calculated Size: " << total << endl;
     cout << "Actual Size: " << generated.size() << endl;
+    cout << "Is Sorted: " << is_sorted(generated.begin(), generated.end()) << endl;
+
     for (auto v : generated) {
         cout << v << endl;
     }
