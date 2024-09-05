@@ -1,22 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int binarySearch(vector<pair<int, int>>& a, int val) {
-    int l = 0;
-    int r = a.size() - 1;
-    while (l <= r) {
-        int m = (l + r) / 2;
-        if (a[m].first == val) {
-            return a[m].second;
-        } else if (a[m].first < val) {
-            l = m + 1;
-        } else {
-            r = m - 1;
-        }
-    }
-    return -1;
-}
-
 int main() {
 #ifndef ONLINE_JUDGE
     // For getting input from input.txt file
@@ -27,18 +11,26 @@ int main() {
 #endif
     int n, x;
     cin >> n >> x;
-    vector<pair<int, int>> a(n);
+    vector<pair<int, int>> a;
     for (int i = 0; i < n; i++) {
-        cin >> a[i].first;
-        a[i].second = i;
+        int v;
+        cin >> v;
+        a.push_back({v, i});
     }
     sort(a.begin(), a.end());
-    for (int i = 0; i < n; i++) {
-        int cur = a[i].second;
-        int other = binarySearch(a, x - a[i].first);
-        if (other != -1 && other != cur) {
-            cout << cur + 1 << " " << other + 1 << endl;
+    int l = 0;
+    int r = n - 1;
+    while (l < r) {
+        int total = a[l].first + a[r].first;
+        if (total == x) {
+            cout << a[l].second + 1 << " " << a[r].second + 1 << endl;
             return 0;
+        } else {
+            if (total > x) {
+                r--;
+            } else {
+                l++;
+            }
         }
     }
     cout << "IMPOSSIBLE" << endl;
