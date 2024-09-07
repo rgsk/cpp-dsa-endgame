@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-int main() {
-    vector<int> vec = {1, 2, 3, 3, 1};
-    cout << is_sorted(vec.begin(), vec.end()) << endl;
-}
+class Solution {
+   public:
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+    }
+};
