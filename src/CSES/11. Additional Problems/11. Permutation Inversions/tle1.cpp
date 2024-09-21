@@ -8,7 +8,6 @@ vector<vector<ll>> dp;
 // Memoized function to calculate the number of permutations of size `n` with `k` inversions
 ll count_permutations(int n, int k) {
     // Base cases
-    if (k < 0) return 0;        // Negative inversions are not possible
     if (n == 0) return k == 0;  // Only 1 way to arrange 0 elements (with 0 inversions)
 
     // If result is already computed, return the memoized value
