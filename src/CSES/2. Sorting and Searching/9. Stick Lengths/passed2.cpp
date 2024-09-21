@@ -18,7 +18,12 @@ int main() {
     sort(lengths.begin(), lengths.end());
 
     // Calculate the median length
-    int median = lengths[n / 2];
+    int median;
+    if (n % 2 == 0) {
+        median = (lengths[n / 2 - 1] + lengths[n / 2]) / 2;
+    } else {
+        median = lengths[n / 2];
+    }
 
     // Calculate the total cost
     long long total_cost = 0;
