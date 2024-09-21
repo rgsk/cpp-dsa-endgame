@@ -1,7 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
-class Solution {
-   public:
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-    }
-};
+
+int main() {
+    vector<int> vec = {1, 2, 3};
+    auto it = vec.end();
+    cout << *it << endl;
+    return 0;
+}

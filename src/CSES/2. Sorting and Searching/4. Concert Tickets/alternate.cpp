@@ -22,28 +22,18 @@ int main() {
         cin >> bids[i];
     }
     for (int bid : bids) {
-        if (tickets.size() == 0) {
-            cout << -1 << endl;
-            continue;
-        }
         auto it = tickets.lower_bound(bid);
-        if (it == tickets.end()) {
-            it--;
-            cout << *it << endl;
-            tickets.erase(it);
-        } else if (*it == bid) {
+        if (it != tickets.end() && *it == bid) {
             cout << *it << endl;
             tickets.erase(it);
         } else {
-            // *it > bid
-            if (it == tickets.begin()) {
-                // we don't have a smaller value
-                cout << -1 << endl;
-            } else {
-                // we have a smaller value
+            // we have a smaller value
+            if (it != tickets.begin()) {
                 it--;
                 cout << *it << endl;
                 tickets.erase(it);
+            } else {
+                cout << -1 << endl;
             }
         }
     }
