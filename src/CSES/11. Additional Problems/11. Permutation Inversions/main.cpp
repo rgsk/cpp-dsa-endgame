@@ -12,7 +12,6 @@ int main() {
     int N, K;
     cin >> N >> K;
 
-    // Initialize the dp table with -1 (indicating uncomputed states)
     vector<ll> dp = vector<ll>(K + 1, -1);
 
     for (int i = 0; i <= N; i++) {
@@ -23,13 +22,12 @@ int main() {
                 continue;
             }
 
-            // Transition: dp[j] = sum of dp[i-1][j-p] for p from 0 to min(j, i-1)
-            dp[j] = copy[j];  // Start with dp[i-1][j]
+            dp[j] = copy[j];
             if (j > 0) {
-                dp[j] = (dp[j] + dp[j - 1]) % MOD;  // Add dp[j-1] to accumulate the prefix sum
+                dp[j] = (dp[j] + dp[j - 1]) % MOD;
             }
             if (j >= i) {
-                dp[j] = (dp[j] - copy[j - i] + MOD) % MOD;  // Subtract out-of-bound values for the sum
+                dp[j] = (dp[j] - copy[j - i] + MOD) % MOD;
             }
         }
     }
