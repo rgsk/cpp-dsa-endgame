@@ -1,28 +1,42 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-const ll MOD = 1e9 + 7;
 
-vector<vector<ll>> dp;
+ll dijkstra(ll n) {
+    // Min-heap (priority queue) to prioritize states with the smallest number of steps
+    priority_queue<pair<ll, ll>, vector<pair<ll, ll>>, greater<pair<ll, ll>>> pq;
+    set<ll> visited;  // To avoid reprocessing the same number
 
-// Memoized function to calculate the number of permutations of size `n` with `k` inversions
-ll count_permutations(int n, int k) {
-    // Base cases
-    if (k < 0) return 0;        // Negative inversions are not possible
-    if (n == 0) return k == 0;  // Only 1 way to arrange 0 elements (with 0 inversions)
+    pq.push({n, 0});
+    visited.insert(n);
 
-    // If result is already computed, return the memoized value
-    if (dp[n][k] != -1) return dp[n][k];
+    while (!pq.empty()) {
+        ll current = pq.top().first;
+        ll steps = pq.top().second;
+        pq.pop();
 
-    ll result = 0;
+        // If we have reached 0, return the number of steps
+        if (current == 0) {
+            return steps;
+        }
 
-    // Try placing the largest number in all positions and calculate the number of inversions
-    for (int i = 0; i <= min(k, n - 1); ++i) {
-        result = (result + count_permutations(n - 1, k - i)) % MOD;
+        // Extract digits of the current number
+        ll temp = current;
+        while (temp > 0) {
+            ll digit = temp % 10;
+            temp /= 10;
+            if (digit > 0) {
+                ll next_num = current - digit;
+                // If the number has not been visited yet
+                if (visited.find(next_num) == visited.end()) {
+                    pq.push({next_num, steps + 1});  // Increment step count
+                    visited.insert(next_num);
+                }
+            }
+        }
     }
 
-    // Store the result in the dp array (memoization)
-    return dp[n][k] = result;
+    return -1;  // We should never reach here
 }
 
 int main() {
@@ -31,14 +45,10 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
 
-    int N, K;
-    cin >> N >> K;
+    ll n;
+    cin >> n;
 
-    // Initialize the dp table with -1 (indicating uncomputed states)
-    dp = vector<vector<ll>>(N + 1, vector<ll>(K + 1, -1));
-
-    // Output the result of the memoized function
-    cout << count_permutations(N, K) << endl;
+    cout << dijkstra(n) << endl;
 
     return 0;
 }
