@@ -4,19 +4,11 @@ using namespace std;
 class SparseTable {
    public:
     vector<vector<int>> table;
-    vector<int> log_table;
 
     SparseTable(const vector<int>& data) {
         int n = data.size();
         int max_log = log2(n) + 1;
         table.resize(n, vector<int>(max_log));
-        log_table.resize(n + 1);
-
-        // Precompute log values
-        log_table[1] = 0;
-        for (int i = 2; i <= n; i++) {
-            log_table[i] = log_table[i / 2] + 1;
-        }
 
         // Build the sparse table
         for (int i = 0; i < n; i++) {
@@ -31,7 +23,7 @@ class SparseTable {
     }
 
     int query(int l, int r) {
-        int log = log_table[r - l + 1];
+        int log = log2(r - l + 1);
         return min(table[l][log], table[r - (1 << log) + 1][log]);
     }
 };
