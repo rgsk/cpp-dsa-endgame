@@ -11,16 +11,26 @@ int main() {
     while (n--) {
         int x;
         cin >> x;
-        int count = 0;
-        for (int i = 1; i <= sqrt(x); i++) {
+        vector<int> powers;
+        for (int i = 2; i * i <= x; i++) {
             if (x % i == 0) {
-                if (i == x / i) {
-                    count++;
-                } else {
-                    count += 2;
+                int c = 0;
+                while (x % i == 0) {
+                    x /= i;
+                    c += 1;
                 }
+                powers.push_back(c);
             }
         }
-        cout << count << endl;
+        if (x != 1) {
+            // works for prime numbers
+            // eg for 17, we have to consider 17^1
+            powers.push_back(1);
+        }
+        int numberOfDivisors = 1;
+        for (int p : powers) {
+            numberOfDivisors *= (p + 1);
+        }
+        cout << numberOfDivisors << endl;
     }
 }
