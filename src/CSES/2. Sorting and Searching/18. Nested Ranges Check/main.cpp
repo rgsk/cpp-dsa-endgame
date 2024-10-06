@@ -1,7 +1,4 @@
-#include <algorithm>
-#include <iostream>
-#include <vector>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 struct Range {
@@ -35,7 +32,6 @@ int main() {
 
     sort(ranges.begin(), ranges.end(), compare);
 
-    // Checking for "contains" (left to right)
     int maxEnd = -1;
     for (int i = 0; i < n; i++) {
         if (ranges[i].end <= maxEnd) {
@@ -44,7 +40,6 @@ int main() {
         maxEnd = max(maxEnd, ranges[i].end);
     }
 
-    // Checking for "is contained" (right to left)
     int minEnd = 1e9 + 1;
     for (int i = n - 1; i >= 0; i--) {
         if (ranges[i].end >= minEnd) {
@@ -53,7 +48,6 @@ int main() {
         minEnd = min(minEnd, ranges[i].end);
     }
 
-    // Output the results
     for (int i = 0; i < n; i++) {
         cout << contains[i] << " ";
     }

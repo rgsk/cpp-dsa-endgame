@@ -114,4 +114,5 @@
     "stdfloat": "cpp",
     "syncstream": "cpp"
   }
+  // "C_Cpp.errorSquiggles": "disabled"
 }
