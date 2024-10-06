@@ -24,35 +24,37 @@ void solve(int N, int K) {
         vec.push_back(i);
         count++;
     }
-    if (!vec.empty())
+    if (!vec.empty()) {
         arr.push_back(vec);
+    }
 
     // Iterate till we have removed all the children
     for (int i = 0; i < N; i++) {
         // Fnd the position of the element to be removed
-        int j = K % (N - i);
+        int steps = K % (N - i);
 
         // Make jumps till we reach the position of the
         // element to be removed
-        while (j) {
+        while (steps > 0) {
             // If we can jump j elements in the current row,
             // we jump to that column
-            if (col + j < arr[row].size()) {
-                col += j;
-                j = 0;
+            if (col + steps < arr[row].size()) {
+                col += steps;
+                steps = 0;
             }
             // If we cannot jump j elements, we jump over
             // all the elements in the current row and move
             // to the next row
             else {
-                j -= arr[row].size() - col;
+                steps -= arr[row].size() - col;
                 col = 0;
                 row++;
             }
             // If all the elements are traversed, we start
             // from the first row again
-            if (row >= arr.size())
+            if (row >= arr.size()) {
                 row = 0;
+            }
         }
 
         // While the current row has lesser columns, move to
@@ -60,18 +62,21 @@ void solve(int N, int K) {
         while (arr[row].size() <= col) {
             col = 0;
             row++;
-            if (row >= arr.size())
+            if (row >= arr.size()) {
                 row = 0;
+            }
         }
         cout << arr[row][col] << " ";
+        // Remove the student from the current row
+        arr[row].erase(arr[row].begin() + col);
         if (i != N - 1) {
-            // Remove the student from the current row
-            arr[row].erase(arr[row].begin() + col);
+            // don't run for last element otherwise below while loop will keep running
             while (arr[row].size() <= col) {
                 col = 0;
                 row++;
-                if (row >= arr.size())
+                if (row >= arr.size()) {
                     row = 0;
+                }
             }
         }
     }
