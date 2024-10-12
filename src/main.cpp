@@ -3,21 +3,19 @@ using namespace std;
 
 class Solution {
    public:
-    int hIndex(vector<int>& citations) {
-        sort(citations.begin(), citations.end());
-        int n = citations.size();
-        // we need to find the first i where citations[i] >= n - i;
-        // and return n - i
-        int l = 0;
-        int r = n - 1;
-        while (l < r) {
-            int m = (l + r) / 2;
-            if (citations[m] >= n - m) {
-                r = m;
-            } else {
-                l = m + 1;
+    string toLowerCase(string s) {
+        for (char &c : s) {
+            if (c <= 'Z') {
+                c = c + ('a' - 'A');
             }
         }
-        return n - r;
     }
 };
+
+int main() {
+    int v = 'z';
+    cout << v << endl;
+    v = 'Z';
+    cout << v << endl;
+    return 0;
+}
