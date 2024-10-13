@@ -13,12 +13,11 @@ int main() {
         cin >> n >> m;
         string s1, s2;
         cin >> s1 >> s2;
-        int s1_initial_length = s1.size();
         int ops = 0;
-        // s1.size() - s1_initial_length + 1 < s2.size()
-        // this condition checks whether we can achieve s2 length starting with last character of first s1
-        // because s2 could start at any index of first s1 only (starting later is reduntant)
-        while (s1.size() - s1_initial_length + 1 < s2.size() && s1.find(s2) == string::npos) {
+        // if we start with single character
+        // after 5 operations it's length would become 32 (1 -> 2 -> 4 -> 8 -> 16 -> 32)
+        // s2 max length is 25, if s2 is still not in s1, it's impossible to find s2 in s1
+        while (ops < 5 && s1.find(s2) == string::npos) {
             s1 += s1;
             ops++;
         }
