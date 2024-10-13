@@ -1,39 +1,50 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 int main() {
 #ifndef ONLINE_JUDGE
+    // For getting input from input.txt file
     freopen("input.txt", "r", stdin);
+
+    // Printing the Output to output.txt file
     freopen("output.txt", "w", stdout);
 #endif
+
     int t;
     cin >> t;
     while (t--) {
         int n;
         cin >> n;
-        vector<int> arr(n);
-        for (int i = 0; i < n; ++i) {
-            cin >> arr[i];
+        vector<int> vec;
+        int min_element = INT_MAX;
+        while (n--) {
+            int v;
+            cin >> v;
+            vec.push_back(v);
+            min_element = min(min_element, v);
         }
-        sort(arr.begin(), arr.end());
-        int largest = arr[arr.size() - 1];
-        int largest_count = arr.end() - lower_bound(arr.begin(), arr.end(), largest);
-        if (largest_count == n) {
+        int lowest = 0;
+        for (int v : vec) {
+            if (v == min_element) {
+                lowest += 1;
+            }
+        }
+        if (lowest == vec.size()) {
             cout << -1 << endl;
-            continue;
+        } else {
+            cout << lowest << " " << vec.size() - lowest << endl;
+            while (lowest--) {
+                cout << min_element << " ";
+            }
+            cout << endl;
+            for (int v : vec) {
+                if (v != min_element) {
+                    cout << v << " ";
+                }
+            }
+            cout << endl;
         }
-        cout << n - largest_count << " " << largest_count << endl;
-        int i = 0;
-        while (arr[i] != largest) {
-            cout << arr[i] << ' ';
-            i++;
-        }
-        cout << endl;
-        while (i < n) {
-            cout << arr[i] << ' ';
-            i++;
-        }
-        cout << endl;
     }
     return 0;
 }
