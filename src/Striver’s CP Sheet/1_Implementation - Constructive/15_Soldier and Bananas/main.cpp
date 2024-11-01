@@ -6,16 +6,12 @@ int main() {
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    int n, k;
-    cin >> n >> k;
-    while (k > 0) {
-        if (n % 10 == 0) {
-            n /= 10;
-        } else {
-            n -= 1;
-        }
-        k--;
+    int k, n, w;
+    cin >> k >> n >> w;
+    int total = 0;
+    for (int i = 1; i <= w; i++) {
+        total += i * k;
     }
-    cout << n << endl;
+    cout << max(total - n, 0) << endl;
     return 0;
 }
