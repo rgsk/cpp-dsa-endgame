@@ -12,7 +12,7 @@ int main() {
             cin >> v;
             if (v == 1) {
                 // we can determine the answer
-                cout << abs(i - 3) + abs(j - 3) << endl;
+                cout << abs(i - 2) + abs(j - 2) << endl;
                 return 0;
             }
         }
